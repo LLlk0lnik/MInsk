@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "ai-job-hunter"
+version = "0.1.0"
+description = "AI Job Hunter Agent"
+authors = ["AI Job Hunter contributors"]
+readme = "README.md"
+packages = [{ include = "ai_job_hunter", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+pydantic = "^2.9.2"
+pydantic-settings = "^2.6.0"
+sqlalchemy = { version = "^2.0.36", extras = ["asyncio"] }
+alembic = "^1.13.3"
+asyncpg = "^0.29.0"
+aiosqlite = "^0.20.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+ruff = "^0.7.4"
+
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"
