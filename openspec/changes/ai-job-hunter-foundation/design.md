@@ -28,6 +28,7 @@
 5. **Дедупликация:** exact source key и normalized hash проверяются первыми; embeddings добавляются как semantic signal, но не заменяют сохранение всех источников.
 6. **Safety:** `DRY_RUN=true`, allowlisted candidate/admin ids, opaque callbacks, explicit approval и уникальный idempotency key защищают от случайной отправки.
 7. **Наблюдаемость:** каждый node/tool пишет trace id, node, prompt version/hash, latency, token/cost metadata и redacted outcome. Секреты и необрезанный PII в traces не сохраняются.
+8. **DDD и abstract interfaces:** domain layer владеет сущностями и инвариантами и не зависит от внешних SDK; application layer использует abstract interfaces/ports; Telegram, LLM, SQLAlchemy и checkpoint providers подключаются infrastructure adapters.
 
 ## Risks / Trade-offs
 

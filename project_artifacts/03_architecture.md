@@ -40,7 +40,14 @@ Telegram channels
 | Порог `score >= threshold` | Python | Нельзя отдавать критическое ветвление модели |
 | Отправить сообщение | Python tool + allowlist | Внешнее действие должно быть контролируемым |
 
-## 3.4 Рекомендуемая структура репозитория
+## 3.4 DDD и abstract interfaces
+
+- Доменный слой содержит сущности, value objects, инварианты и domain services; он не импортирует Telegram SDK, LLM SDK, SQLAlchemy или LangGraph.
+- Application layer координирует use cases и зависит только от abstract interfaces/ports.
+- Infrastructure layer реализует порты через PostgreSQL, Telegram, LLM и другие внешние системы.
+- Concrete adapters подключаются на composition root; framework-specific типы не должны проникать в domain contracts.
+
+## 3.5 Рекомендуемая структура репозитория
 
 ```text
 src/ai_job_hunter/
@@ -61,7 +68,7 @@ infra/
 project_artifacts/
 ```
 
-## 3.5 Отказы и восстановление
+## 3.6 Отказы и восстановление
 
 - LLM timeout/5xx: retry 2 раза, затем `run_status=failed_retryable`.
 - Schema validation: не повторять тот же output бесконечно; сохранить redacted raw response и отправить в review queue.
@@ -69,7 +76,7 @@ project_artifacts/
 - Database failure: транзакция откатывается, cursor не продвигается до commit.
 - Restart: worker загружает checkpoint по `thread_id`, повторяет только незавершённую node.
 
-## 3.6 Архитектурные решения
+## 3.7 Архитектурные решения
 
 1. PostgreSQL используется и для бизнес-данных, и для durable checkpointing в production.
 2. SQLite допускается для unit-тестов, но не считается production checkpoint store.
