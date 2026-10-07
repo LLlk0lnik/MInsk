@@ -1,0 +1,52 @@
+# Durable project planning: keep these tracked.
+# openspec/
+# project_artifacts/
+# .agents/skills/
+
+# Local-only Codex context and state.
+PROJECT_CONTEXT.md
+.codex/
+.codex-log/
+AGENTS.override.md
+
+# Environment files and credentials.
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+*.secret
+*.token
+*.pem
+*.key
+
+# Telegram/Telethon local sessions.
+*.session
+*.session-journal
+
+# Runtime logs and local databases.
+*.log
+*.sqlite
+*.sqlite3
+*.db
+
+# Python caches and build outputs.
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+dist/
+build/
+*.egg-info/
+
+# OS/editor files.
+.DS_Store
+.idea/
+.vscode/
